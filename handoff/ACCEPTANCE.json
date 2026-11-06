@@ -1,0 +1,52 @@
+{
+  "schema": "handoff.acceptance.v1",
+  "technical_handoff": "READY",
+  "checks": [
+    {
+      "check": "integrity",
+      "exit": 0,
+      "status": "PASS"
+    },
+    {
+      "check": "portable-tests",
+      "exit": 0,
+      "status": "PASS"
+    },
+    {
+      "check": "offline",
+      "exit": 0,
+      "status": "PASS"
+    }
+  ],
+  "full_profile_environment": "BLOCK",
+  "external_scheduler_e2e": "NOT_RUN",
+  "third_party_business_tests": "NOT_RUN",
+  "publisher_signature": "NOT_PROVIDED",
+  "human_signoff": "PENDING",
+  "permission_to_execute_third_party_code": "NOT_GRANTED",
+  "production_deployment": "BLOCK",
+  "release": "r4",
+  "portable_counts": {
+    "discovered": 203,
+    "passed": 200,
+    "skipped": 3,
+    "failures": 0,
+    "errors": 0
+  },
+  "independent_behavior_groups": {
+    "passed": 9,
+    "scope": "synthetic isolated forward tests, not human signoff"
+  },
+  "execution_ledger": {
+    "pass": 32,
+    "block": 3,
+    "verdict": "BLOCK"
+  },
+  "source_acquisition_hard_quota": "UNAVAILABLE_PRE_NETWORK_BLOCK_IF_REQUIRED",
+  "stress": {
+    "normal_correct_transactions": 1877,
+    "controlled_stop_completed": 8,
+    "controlled_stop_cancelled": 232,
+    "production_slo": "NOT_APPROVED"
+  }
+}

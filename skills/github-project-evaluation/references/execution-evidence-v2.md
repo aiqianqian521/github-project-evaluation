@@ -1,0 +1,21 @@
+# Local execution evidence v2: integrity, not project acceptance
+
+For an **already authorized** isolated run, preserve its original stdout/stderr/exit files outside the checkout; write a separate `project-tests.evidence.v2` JSON with frozen `repository`, `commit` and 1–20 case IDs. Each case declares `expected_exit_code` and exactly three artifact `{path,sha256}` pairs (`stdout`, `stderr`, `exit`). Do not generate `expected_exit_code` by copying the observed exit: freeze it in the test specification before execution. The command does not run third-party code:
+
+`python3 scripts/validate_execution_evidence.py --manifest <manifest.json> --artifacts-dir <run-dir> --output-dir <new-check-dir>`
+
+It bounds files to 2 MB each, rejects traversal, symlinked files/parent directories and duplicate case/artifact paths, checks bytes against hashes and checks observed vs expected exit. Output `EVIDENCE-CHECK.json` is always `decision=BLOCK` and `candidate_acceptance=NOT_REVIEWED`; exit 0 means **only** `local_integrity=INTACT_LOCAL`, while exit 2 means an observable artifact mismatch. Caller must still check per-case stdout semantics against an oracle and predeclared thresholds. The repository/commit fields are assertions from a writable manifest, **not** GitHub verification, provenance or third-party authorization. Do not pass credentials in manifest/logs.
+
+An attacker changing both log and manifest hashes can obtain `INTACT_LOCAL`; the report therefore records `evidence_trust=LOCAL_UNAUTHENTICATED`. Approval requires a frozen independently anchored task spec, independently verified checkout, audited worker, signed authorization, externally witnessed artifact digest and separate independent business-oracle/human review; none is provided by this validator. Previous `project-tests.execution.v1` remains a **legacy claim**, not the v2 integrity schema. The first-pass review audit treats a v1 `PASS` as `UNVERIFIED_CLAIM` and remains BLOCK. Do not silently turn v2 integrity into v1 execution PASS.
+
+Actual replay and forged log/hash pairs: `work_ooda/20261023-math-holdout/EVIDENCE-RESULT.md`.
+
+## Optional external-signature verification (no automatic promotion)
+
+r3 selects a trusted OpenSSL via absolute `OPENSSL_BINARY` or PATH. Use OpenSSL 3 with Ed25519 support; a missing/unsupported binary blocks signature verification instead of substituting a successful result. The verifier never downloads or replaces the system crypto tool.
+
+An independent reviewer may sign a **separate** `project-tests.attestation.v1` JSON envelope containing only `schema`, `repository`, `commit`, `run_id`, `task_spec_sha256`, `manifest_sha256`. Sign the **exact JSON bytes** with an Ed25519 key held outside the execution worker (`openssl pkeyutl -sign -rawin -inkey <private-key> -in <envelope> -out <signature>`). Keep the private key out of runs and deliverables. The reviewer must obtain the task spec and run ID **before** execution; a retroactive signer does not establish this. The caller must pin the SHA-256 of the reviewer public-key **PEM bytes** through a separate, trusted channel, not copy it from the execution workspace.
+
+`python3 scripts/verify_execution_attestation.py --manifest <v2.json> --envelope <signed-envelope.json> --signature <envelope.sig> --trusted-public-key <reviewer-public.pem> --pinned-key-sha256 <out-of-band-pin> --artifacts-dir <run-dir> --expected-repository owner/repo --expected-commit <sha> --expected-run-id <frozen-id> --expected-spec-sha256 <frozen-spec-sha> --output-dir <new-check-dir>`
+
+It rechecks all v2 artifact bytes and verifies the envelope with OpenSSL. Exit 0 means **only** local artifact consistency, signature validity and caller-supplied pin/identity/spec binding; `ATTESTATION-CHECK.json` still records `anchor_trust=CALLER_ASSERTED_NOT_INDEPENDENTLY_VERIFIED`, `candidate_acceptance=NOT_REVIEWED`, `decision=BLOCK`. Trust in signer identity, reviewer independence, pre-run authorization, semantic output, sandbox integrity, freshness/replay policy and revocation need their own checks. An attacker able to replace the trusted pin and key can self-sign; do not obtain the pin from the same directory as artifacts. A local self-signed retrospective demo at `work_ooda/20261023-math-holdout/attestation-run-r2/` demonstrates signature binding and its limits, **not** a real independent attestation.

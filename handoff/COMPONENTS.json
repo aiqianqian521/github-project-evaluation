@@ -1,0 +1,64 @@
+{
+  "schema": "handoff.components.v1",
+  "scope": "declared components inventory, not complete supply-chain audit or SPDX SBOM",
+  "python_runtime": {
+    "minimum": "3.11",
+    "python_packages": "standard library only; no pip install required"
+  },
+  "binaries": [
+    {
+      "name": "git",
+      "purpose": "frozen local repo reads/clone",
+      "installed_by_release": false
+    },
+    {
+      "name": "openssl",
+      "purpose": "Ed25519 sign/verify unit tests and verifier",
+      "selection": "OPENSSL_BINARY absolute trusted path or PATH",
+      "installed_by_release": false
+    },
+    {
+      "name": "bubblewrap",
+      "purpose": "Linux-only optional integration probes",
+      "selection": "explicit BWRAP_BINARY",
+      "installed_by_release": false
+    }
+  ],
+  "external": [
+    {
+      "name": "Loop engine",
+      "included": false,
+      "gate": "LOOP_TEST_ENGINE_ROOT + LOOP_CONTRACT_SHA256; real scheduler E2E not included"
+    }
+  ],
+  "third_party_evidence": [
+    {
+      "name": "MarkupSafe",
+      "commit": "4e111271b1494995708a9e878a10829b5e10c7ba",
+      "included": "git bundle only; not installed/executed",
+      "declared_license": "BSD-3-Clause; read bundle LICENSE.txt",
+      "license_approval": "PENDING"
+    },
+    {
+      "name": "public source snapshots",
+      "rights": "retained baseline evidence; site terms apply"
+    }
+  ],
+  "r4_public_source_evidence": [
+    {
+      "repository": "lucidrains/imagen-pytorch",
+      "commit": "192f8b924ba8ebd7b5d2b02422d6b2755e123b1d",
+      "declared_code_license": "MIT"
+    },
+    {
+      "repository": "nv-tlabs/GEN3C",
+      "commit": "db2ffe12ced12ddafcec5e0422ee46ce8520746b",
+      "declared_code_license": "Apache-2.0; model separately NVIDIA Open Model License, weights not included"
+    },
+    {
+      "repository": "iBotPeaches/Apktool",
+      "commit": "fd9d5d4dc7e45fa7f984698ded7a03c554d0a7b3",
+      "declared_code_license": "Apache-2.0"
+    }
+  ]
+}

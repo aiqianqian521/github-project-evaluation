@@ -1,0 +1,13 @@
+{
+  "schema": "handoff.oracle-design.v1",
+  "scope": "ordinary untrusted strings in HTML text nodes only",
+  "status": "DESIGN_NOT_EXECUTED_OR_INDEPENDENTLY_APPROVED",
+  "mapping": {"&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&#34;"},
+  "non_special_characters": "preserve exact code points; do not normalize",
+  "expected_generation": "join mapping.get(character, character) for each input character before invoking target",
+  "html_oracle": "independent HTML parser; one synthetic container; exact original text content; no additional elements",
+  "trust_boundary": "Markup and __html__ deliberately mark safe; never claim they sanitize external input",
+  "seed": 20261026,
+  "execution_authorized": false,
+  "deployment_gate": "BLOCK"
+}

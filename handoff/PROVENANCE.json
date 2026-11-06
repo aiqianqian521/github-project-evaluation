@@ -1,0 +1,29 @@
+{
+  "schema": "handoff.provenance.v1",
+  "release": "github-project-evaluation-handoff-20261026-r4",
+  "date": "2026-10-26",
+  "baseline_archives": [
+    {
+      "sha256": "2937fa5bb59244e6418d93e6b629dbdab48dbb7b7f4a6380c738b46056422cd9",
+      "entries": 144,
+      "bytes": 230565,
+      "unpacked_bytes": 697177,
+      "name": "github-evaluation-testing-complete-20261023-r5.tar.gz"
+    },
+    {
+      "sha256": "67642406a38c8f26a7b9c6ce57014a4e5f8d43ca0a41789e878eccef9de00dea",
+      "entries": 210,
+      "bytes": 583497,
+      "unpacked_bytes": 1717575,
+      "name": "github-search-first-pass-handoff-20261023-r2.tar.gz"
+    }
+  ],
+  "modification_scope": "r4 copy only; original downloads, frozen r3 and original FAIL reports preserved",
+  "historical_evidence": "retained without rewriting claims",
+  "publisher_signature": "NOT_PROVIDED",
+  "upstream_tooling_license": "NOT_DETERMINED_INTERNAL_HANDOFF_ONLY",
+  "previous_release": {
+    "name": "github-project-evaluation-handoff-20261026-r3",
+    "archive_sha256": "bb8ad6a2a2d79653d4348d57ed6460ef6e09ad6bd1ec2774c788863880b22021"
+  }
+}

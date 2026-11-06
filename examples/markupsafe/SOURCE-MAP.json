@@ -1,0 +1,16 @@
+{
+  "schema": "handoff.source-map.v1",
+  "repository": "pallets/markupsafe",
+  "commit": "4e111271b1494995708a9e878a10829b5e10c7ba",
+  "source": "evidence/repository/github-markupsafe-4e111271.bundle",
+  "origin_trust": "LOCAL_BUNDLE_NOT_INDEPENDENTLY_AUTHENTICATED",
+  "files": {
+    "README.md": "869433214a9c2267cfb9422fe507a152f238b98a61830fdcf0166fae264454f1",
+    "LICENSE.txt": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea",
+    "pyproject.toml": "d6b94472e74f46bf0e6bb6773ebf27b23d4ca9f6204671a6b5e4095cbc196948",
+    "src/markupsafe/__init__.py": "310afadaabdd94a53d5b57c84cbd56b1ebe1877454be8ba986237d142e533df0",
+    "src/markupsafe/_native.py": "8522ecf099b3e5aa9acae7a780927791d4f93f0369056a4aae6412762a67742f",
+    "src/markupsafe/_speedups.c": "b77b42ea8555efe6e6294aaf08ee69552932f86f000885e958c689c2436d2638",
+    "tests/test_escape.py": "68b4dac1f27ea365f3ceb9a306bed1543db5e232b7311e319fe82b6fcce722a1"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub 项目评估：查找、首评与测试设计"
+  short_description: "跨源查找开源项目、只读首评仓库证据；基于证据设计测试，仅经授权后隔离执行"
+  default_prompt: "使用 $github-project-evaluation 先跨来源查找项目并记录缺口；经授权冻结仓库后只读评估 README/Start 文档、源码、许可、测试与 CI，产出证据分与目标适配分；随后阅读 references/discovery-handoff.md，为该项目产出有独立判据的功能/压力测试设计（TEST-HANDOFF.md）。若另行授权让 Loop 调度真实测试，阅读 references/native-loop-runner.md 并在隔离副本运行固定的原生套件和交付门禁，保留原始失败。只在批准的预算内执行；设计文档或 Loop Verify 不代表项目验收通过。"

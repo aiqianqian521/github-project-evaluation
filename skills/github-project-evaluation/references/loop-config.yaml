@@ -1,0 +1,30 @@
+runtime:
+  root: "projects/discovery-task"
+backtest:
+  script: "backtest/mock_backtest.py"
+task:
+  name: project-discovery-skill-eval
+  workspace: workspace
+  execution:
+    type: agent_prompt
+    entry: loop_discovery_runner.DiscoveryRunner
+  success_criteria:
+    - metric: stages_failed
+      operator: lte
+      threshold: 0
+loop:
+  signals: ../projects/discovery-task/data/online.json
+  batch_size: 1
+  max_rounds: 3
+  max_seconds: 750
+  error_stop: 5
+  no_progress_stop: 99
+stop:
+  completion: []
+memory:
+  sqlite_path: patterns.db
+l2:
+  enabled: false
+ooda:
+  uq_enabled: false
+  schema_validate: false
